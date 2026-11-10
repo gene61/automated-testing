@@ -1,0 +1,28 @@
+# Automated test cases for the cart demo.
+#
+# These are PREDETERMINED test cases: the app must satisfy them. Write them
+# first, then make the code pass. One row = one test case.
+#
+# Columns (do not rename without updating lib/test-cases.ts):
+#   id       unique case ID, shown in CI reports
+#   title    short description of what is being verified
+#   adds     items to add, as "product:qty" separated by "|" -> "hoodie:2|tshirt:1"
+#   subtotal expected subtotal text, e.g. "$120.00"
+#   discount expected discount text, e.g. "-$12.00"
+#   total    expected total text, e.g. "$108.00"
+#
+# Products available: tshirt ($25.00), hoodie ($60.00), stickers ($5.00)
+# Rule: 10% off once the subtotal reaches $100.00 (inclusive).
+id,title,adds,subtotal,discount,total
+TC-01,empty cart shows zeros,,$0.00,-$0.00,$0.00
+TC-02,single cheap item has no discount,stickers:1,$5.00,-$0.00,$5.00
+TC-03,single t-shirt has no discount,tshirt:1,$25.00,-$0.00,$25.00
+TC-04,two t-shirts stay below threshold,tshirt:2,$50.00,-$0.00,$50.00
+TC-05,mixed items below threshold,tshirt:1|stickers:1,$30.00,-$0.00,$30.00
+TC-06,subtotal exactly at threshold gets discount,tshirt:4,$100.00,-$10.00,$90.00
+TC-07,subtotal just below threshold gets no discount,tshirt:1|stickers:14,$95.00,-$0.00,$95.00
+TC-08,single hoodie below threshold,hoodie:1,$60.00,-$0.00,$60.00
+TC-09,two hoodies trigger the discount,hoodie:2,$120.00,-$12.00,$108.00
+TC-10,discount applies above threshold on mixed cart,hoodie:2|tshirt:1,$145.00,-$14.50,$130.50
+TC-11,many stickers trigger the discount,stickers:20,$100.00,-$10.00,$90.00
+TC-12,large cart discount applies cleanly,hoodie:1|stickers:10,$110.00,-$11.00,$99.00
