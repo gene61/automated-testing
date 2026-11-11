@@ -7,16 +7,24 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  // One test at a time locally so the headed browser is easy to follow.
+  workers: process.env.CI ? 1 : 1,
   reporter: process.env.CI ? [["list"], ["html", { open: "never" }]] : "list",
   use: {
     baseURL: `http://localhost:${PORT}`,
     trace: "on-first-retry",
+    launchOptions: {
+      // Pause between each action so you can watch it happen.
+      // Set to 0 (or use CI) for normal speed.
+      slowMo: process.env.CI ? 0 : 800,
+    },
   },
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      // Visible browser locally so you can follow along; headless on CI,
+      // which has no display.
+      use: { ...devices["Desktop Chrome"], headless: !!process.env.CI },
     },
   ],
   // CI runs the already-built production server (`npm run build` + `next start`)
