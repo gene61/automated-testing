@@ -1,3 +1,15 @@
+/**
+ * UNIT TESTS — run with `npm test` (Vitest, no browser)
+ *
+ * Tests the pure pricing functions in lib/cart.ts by calling them directly.
+ * No React, no DOM, no server. Fastest tier (~4ms for all 11).
+ *
+ * Tier 1 of 3:
+ *   1. UNIT      lib/cart.test.ts             ← you are here
+ *   2. COMPONENT components/cart-demo.test.tsx
+ *   3. E2E       e2e/*.spec.ts
+ */
+
 import { describe, expect, test } from "vitest";
 import {
   type CartItem,

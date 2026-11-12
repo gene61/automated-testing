@@ -1,3 +1,17 @@
+/**
+ * COMPONENT TESTS — run with `npm test` (Vitest + jsdom, no real browser)
+ *
+ * Renders <CartDemo /> into a simulated DOM and clicks its buttons.
+ * Tests the UI wiring: state, handlers, what appears on screen.
+ * Does NOT test the pricing formulas directly (that's lib/cart.test.ts)
+ * and does NOT test the real page (that's e2e/).
+ *
+ * Tier 2 of 3:
+ *   1. UNIT      lib/cart.test.ts
+ *   2. COMPONENT components/cart-demo.test.tsx  ← you are here
+ *   3. E2E       e2e/*.spec.ts
+ */
+
 import { describe, expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";

@@ -1,11 +1,21 @@
+/**
+ * END-TO-END TESTS (data-driven) — run with `npm run test:e2e`
+ * (Playwright + real Chromium)
+ *
+ * Runs every row in test-cases/cart-cases.csv as an E2E test: one row = one
+ * browser test. This file never changes when cases are added — edit the CSV.
+ *
+ * Tier 3 of 3:
+ *   1. UNIT      lib/cart.test.ts
+ *   2. COMPONENT components/cart-demo.test.tsx
+ *   3. E2E       e2e/test-cases.spec.ts  ← you are here
+ *                e2e/cart.spec.ts (hand-written page checks)
+ *
+ * Reached via: test-cases/cart-cases.csv -> lib/test-cases.ts -> this file
+ */
+
 import { test, expect } from "@playwright/test";
 import { loadTestCases } from "../lib/test-cases";
-
-/**
- * Runs every row in test-cases/cart-cases.csv as an end-to-end test.
- *
- * This file never changes when cases are added — edit the CSV instead.
- */
 
 const testCases = loadTestCases();
 
